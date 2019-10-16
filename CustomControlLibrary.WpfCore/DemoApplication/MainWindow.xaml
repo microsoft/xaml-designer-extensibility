@@ -1,0 +1,17 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoApplication"
+        xmlns:WpfCore="clr-namespace:CustomControlLibrary.WpfCore;assembly=CustomControlLibrary.WpfCore" x:Class="DemoApplication.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <WpfCore:CustomButton x:Name="button2" Margin="30,30,30,30" Opacity="1.0"/>
+        <!--<WpfCore:CustomComboBox IsDropDownOpen="False">
+            <ComboBoxItem Content="File"></ComboBoxItem>
+            <ComboBoxItem Content="Open"></ComboBoxItem>
+        </WpfCore:CustomComboBox>-->
+    </Grid>
+</Window>

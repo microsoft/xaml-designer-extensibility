@@ -1,0 +1,26 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:PropertyEditing="clr-namespace:Microsoft.VisualStudio.DesignTools.Extensibility.PropertyEditing;assembly=Microsoft.VisualStudio.DesignTools.Interaction"
+    xmlns:Local="clr-namespace:CustomControlLibrary.WpfCore.DesignTools"
+    xmlns:Media="clr-namespace:System.Windows.Media;assembly=PresentationCore"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    x:Class="CustomControlLibrary.WpfCore.DesignTools.EditorResources">
+
+    <DataTemplate x:Key="BrushExtendedEditorTemplate">
+        <Local:ColorsListControl SelectedBrush="{Binding Value, Mode=TwoWay}"/>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="InlineEditorTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding StringValue}"/>
+            <PropertyEditing:EditModeSwitchButton Grid.Column="1"/>
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>
