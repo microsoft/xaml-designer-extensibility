@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.DesignTools.Extensibility.Metadata;
 using Microsoft.VisualStudio.DesignTools.Extensibility.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomControlLibrary.WpfCore.DesignTools
 {
@@ -15,12 +10,12 @@ namespace CustomControlLibrary.WpfCore.DesignTools
     {
         public CustomComboBoxDesignModeValueProvider()
         {
-            Properties.Add(new TypeIdentifier("CustomControlLibrary.WpfCore.CustomComboBox"), "IsDropDownOpen");
+            Properties.Add(new TypeIdentifier("System.Windows.Controls.ComboBox"), "IsDropDownOpen");
         }
 
         public override object TranslatePropertyValue(ModelItem item, PropertyIdentifier identifier, object value)
         {
-            if (identifier.DeclaringTypeIdentifier.Name.Equals("CustomControlLibrary.WpfCore.CustomComboBox") &&
+            if (identifier.DeclaringTypeIdentifier.Name.Equals("System.Windows.Controls.ComboBox") &&
                 identifier.Name == "IsDropDownOpen")
             {
                 return (bool)value | CustomComboBoxAdornerProvider.SelectedItem == item;

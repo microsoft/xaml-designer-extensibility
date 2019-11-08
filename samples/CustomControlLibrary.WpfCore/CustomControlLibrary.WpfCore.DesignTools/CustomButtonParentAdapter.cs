@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.DesignTools.Extensibility.Metadata;
 using Microsoft.VisualStudio.DesignTools.Extensibility.Model;
 using System;
-using System.Runtime.InteropServices;
 
 namespace CustomControlLibrary.WpfCore.DesignTools
 {
@@ -13,6 +12,7 @@ namespace CustomControlLibrary.WpfCore.DesignTools
     {
         // The following method is called when any control is dropped over custom button
         // from toolbox. It checks if custombutton can take this child or not.
+        // It might be called at other times too.
         public override bool CanParent(ModelItem parent, TypeIdentifier childType)
         {
             if (parent == null) throw new ArgumentNullException("parent");

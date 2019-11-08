@@ -1,9 +1,4 @@
 ﻿using Microsoft.VisualStudio.DesignTools.Extensibility.PropertyEditing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 
@@ -13,7 +8,7 @@ namespace CustomControlLibrary.WpfCore.DesignTools
     {
         private const string editorTemplate =
             "<DataTemplate xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">" +
-            "<DatePicker SelectedDate=\"{Binding StringValue, Mode=TwoWay}\" />" +
+            "<DatePicker SelectedDate=\"{Binding Value, Mode=TwoWay}\" />" +
             "</DataTemplate>";
 
         public DateInlinePropertyValueEditor()
