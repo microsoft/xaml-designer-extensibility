@@ -1,11 +1,14 @@
-# XAML Designer Extensibility Samples
-Starting in Visual Studio 2019 version 16.1 as a public preview, the XAML designer supports two different architectures: the designer isolation architecture and the
-most recent surface isolation architecture. [This article](https://docs.microsoft.com/en-us/visualstudio/extensibility/xaml-designer-extensibility-migration?view=vs-2019)
+# XAML Designer Extensibility Documents & Samples
+
+Starting in Visual Studio 2019 version 16.3, the XAML designer supports two different architectures: the designer isolation architecture and the
+most recent surface isolation architecture. [This article](./documents/xaml-designer-extensibility-migration.md)
  explains the changes in detail. This GitHub repository contains the code samples that demonstrate how to use XAML designer extensibility. 
 
-## Code Samples
+## Documents
+  - [XAML designer extensibility migration](./documents/xaml-designer-extensibility-migration.md)
 
-  - [CustomControlLibrary.WpfCore](https://github.com/microsoft/xaml-designer-extensibility-samples/tree/master/CustomControlLibrary.WpfCore)
+## Code Samples
+  - [CustomControlLibrary.WpfCore](./samples/CustomControlLibrary.WpfCore)
 
 ## Code of Conduct
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
@@ -22,6 +25,3 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## License
 These samples and templates are all licensed under the MIT license. See the LICENSE file in the root.
-
-## Questions
-Email questions to: vsxdesignxaml@microsoft.com.
