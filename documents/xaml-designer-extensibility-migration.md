@@ -75,6 +75,8 @@ Public Class AttributeTableProvider
 End Class
 ```
 
+Starting in Visual Studio 2019 16.4, the `AttachedPropertyBrowsableForTypeAttribute` is supported when added directly to a runtime control library. In a *.designtools.dll* extension `AttachedPropertyBrowsableForTypeIdentifierAttribute` should be used instead to reference the type using a string name.
+
 ## Feature providers and Model API
 
 Feature providers are implemented in extension assemblies and loaded in the Visual Studio process. `FeatureAttribute` will continue to reference feature provider types directly using [typeof](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/typeof).
@@ -169,6 +171,7 @@ Furthermore, `ModelItem` APIs like `SetValue` will only support instances of pri
 
 * Primitive .NET Framework types: `Boolean`, `Byte`, `Char`, `DateTime`, `Double`, `Enum`, `Guid`, `Int16`, `Int32`, `Int64`, `Nullable`, `SByte`, `Single`, `String`, `Type`, `UInt16`, `UInt32`, `UInt64`, `Uri`
 * Known WPF .NET Framework types (and derived types): `Brush`, `Color`, `CompositeTransform`, `CornerRadius`, `Duration`, `EasingFunctionBase`, `EasingMode`, `EllipseGeometry`, `FontFamily`, `GeneralTransform`, `Geometry`, `GradientStopCollection`, `GradientStop`, `GridLength`, `ImageSource`, `InlineCollection`, `Inline`, `KeySpline`, `Material`, `Matrix`, `PathFigureCollection`, `PathFigure`, `PathSegmentCollection`, `PathSegment`, `Path`, `PointCollection`, `Point`, `PropertyPath`, `Rect`, `RepeatBehavior`, `Setter`, `Size`, `StaticResource`, `TextAlignment`, `TextDecorationCollection`, `ThemeResourceExtension`, `Thickness`, `TimeSpan`, `Transform3D`, `TransformCollection`
+* Starting in Visual Studio 2019 16.4, [Proxy Objects](#proxy-objects) can be defined to map custom types.
 
 For example:
 
@@ -201,6 +204,10 @@ End Class
 ```
 
 More code samples are available in the [samples](../samples) folder.
+
+## Proxy Objects
+
+Starting in Visual Studio 2019 16.4, a design-time proxy type can be defined as part of an extension along with a `TypeConverter` to map to and from a serialized represenation. When using `PropertyValueEditor`, `ModelItem.GetCurrentValue` or `ModelProperty.ComputedValue`, the designer will serialize the object in the runtime process and deserialize into a proxy instance in the process the extension is running in.
 
 ## Limited support for .design.dll extensions
 
