@@ -5,4 +5,26 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackageId>CustomControlLibrary.WpfCore</PackageId>
+    <Description>CustomControlLibrary.WpfCore</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageFile Include="VisualStudioToolsManifest.xml">
+      <Kind>Tools</Kind>
+    </PackageFile>
+    <PackageFile Include="$(OutputPath)\CustomControlLibrary.WpfCore.DesignTools.dll">
+      <Kind>Lib</Kind>
+      <TargetPath>Design\CustomControlLibrary.WpfCore.DesignTools.dll</TargetPath>
+    </PackageFile>
+  </ItemGroup>
+
 </Project>
