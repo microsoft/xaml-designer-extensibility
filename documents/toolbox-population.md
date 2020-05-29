@@ -13,6 +13,8 @@ This approach requires registering with the Toolbox Controls Installer (TCI) in 
 
 If a NuGet package referenced by a XAML project contains a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls), Toolbox will show the Toolbox items listed in the manifest.
 
+You can try this by adding a reference to your own package or to [our WPF .NET Core sample package](#how-to-build-our-wpf-net-core-sample-package).
+
 ### Target Framework-specific Manifests
 
 In Visual Studio 16.6 and later, Toolbox population supports multiple VisualStudioToolsManifest.xml files per package -- the maniest in the tools root plus additional manifests for specific Target Framework Monikers (TFMs) in subdirectories of tools. The Toolbox will show the items from the manifest that best matches the target framework of the current project, falling back to the manifest in the tools root if there is no better match. The manifest in the tools root is also required for compatibility with older versions of Visual Studio.
@@ -42,16 +44,7 @@ If a NuGet package in a NuGet fallback folder contains a [tools\VisualStudioTool
 
 ### Getting started
 
-1. Create a NuGet package containing WPF .NET Core controls and a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls).
-
-   * You can either create your own package, or...
-   * Build our sample package by doing the following:
-
-     1. Clone this repo.
-     2. Open samples\CustomControlLibrary.WpfCore\CustomControlLibrary.WpfCore.sln.
-     3. Build the solution.
-     4. Generate the package (bin\Debug\CustomControlLibrary.WpfCore.1.0.0.nupkg) by right-clicking on the CustomControlLibrary.WpfCore project in Solution Explorer and selecting Pack, or by running the following command from the directory containing CustomControlLibrary.WpfCore.csproj: msbuild /t:Pack
-
+1. Create a NuGet package containing WPF .NET Core controls and a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls). You could create your own package, or [build our sample package](#how-to-build-our-wpf-net-core-sample-package).
 2. Create a new directory somewhere on disk to serve as your NuGet fallback folder.
 3. Create a new text file with the extension .config (ex. MyFallbackFolder.config) in %ProgramFiles(x86)%\NuGet\Config.
 4. Add the following XML to the .config file, replacing c:\MyFallbackFolder with the actual path to your fallback folder.
@@ -78,3 +71,10 @@ If a NuGet package in a NuGet fallback folder contains a [tools\VisualStudioTool
 10. Wait for both the Toolbox and XAML designer to finish initializing.
 11. The Toolbox items defined in tools\VisualStudioToolsManifest.xml should appear in the Toolbox. If you're using our sample project, you should see a CustomControlLibrary.WpfCore tab in Toolbox containing a Toolbox item for the CustomButton control.
 12. Double-click one of the Toolbox items to add a control of that type to the XAML file.
+
+## How to build our WPF .NET Core sample package
+
+1. Clone [this repo](https://github.com/microsoft/xaml-designer-extensibility).
+2. Open samples\CustomControlLibrary.WpfCore\CustomControlLibrary.WpfCore.sln in Visual Studio.
+3. Build the solution.
+4. Generate the package (bin\Debug\CustomControlLibrary.WpfCore.1.0.0.nupkg) by right-clicking on the CustomControlLibrary.WpfCore project in Solution Explorer and selecting Pack, or by running the following command from the directory containing CustomControlLibrary.WpfCore.csproj: msbuild /t:Pack
