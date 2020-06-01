@@ -1,6 +1,14 @@
 # Toolbox population
 
-## Toolbox items from unreferenced assemblies (all supported versions of Visual Studio)
+There are several ways to get your XAML controls to appear in Visual Studio's Toolbox pane. Some of the approaches are outlined below. 
+
+| Population mechanism                                                           | Supported Frameworks | Supported Visual Studio Versions       |
+| :----------------------------------------------------------------------------- | :------------------- | :------------------------------------- |
+| [Unreferenced assemblies](#toolbox-items-from-unreferenced-assemblies)         | WPF .NET Framework   | All supported versions                 |
+| [Referenced NuGet packages](#toolbox-items-from-referenced-nuget-packages)     | All XAML frameworks  | Visual Studio 15.0 and later           |
+| [Unreferenced NuGet packages](#toolbox-items-from-unreferenced-nuget-packages) | WPF .NET Core        | Visual Studio 16.7 Preview 2 and later |
+
+## Toolbox items from unreferenced assemblies
 
 This approach requires registering with the Toolbox Controls Installer (TCI) in the Windows registry. [The TCI specification](https://www.microsoft.com/en-us/download/details.aspx?id=35536) explains how to register your assemblies. Once registered, your controls will be shown in the Toolbox for any compatible project, even projects that do not reference your assembly.
 
@@ -9,7 +17,7 @@ This approach requires registering with the Toolbox Controls Installer (TCI) in 
 * This approach is only supported for WPF .NET Framework assemblies.
 * Since registration requires modifying the registry, you need to provide an installer of some sort.
 
-## Toolbox items from referenced NuGet packages (Visual Studio 15.0 and later)
+## Toolbox items from referenced NuGet packages
 
 If a NuGet package referenced by a XAML project contains a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls), Toolbox will show the Toolbox items listed in the manifest.
 
@@ -27,7 +35,7 @@ Here's an example:
 | \tools\netcoreapp31\VisualStudioToolsManifest.xml | .NET Core >= 3.1                                            |
 | \tools\VisualStudioToolsManifest.xml              | .NET Framework < 4.7, .NET Core < 3.1, and other frameworks |
 
-## Toolbox items from unreferenced NuGet packages (Visual Studio 16.7 Preview 2 and later)
+## Toolbox items from unreferenced NuGet packages
 
 If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-started) section below) contains a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls), Toolbox will show the Toolbox items listed in the manifest for any project that is compatible with the package, even projects that do not reference that package.
 
