@@ -2,7 +2,7 @@
 
 ## Toolbox items from unreferenced assemblies (all supported versions of Visual Studio)
 
-This approach requires registering with the Toolbox Controls Installer (TCI) in the Windows registry. [The TCI spec](https://www.microsoft.com/en-us/download/details.aspx?id=35536) explains how to register your assemblies. Once registered, your controls will be shown in the Toolbox for any compatible project, even projects that do not reference your assembly.
+This approach requires registering with the Toolbox Controls Installer (TCI) in the Windows registry. [The TCI specification](https://www.microsoft.com/en-us/download/details.aspx?id=35536) explains how to register your assemblies. Once registered, your controls will be shown in the Toolbox for any compatible project, even projects that do not reference your assembly.
 
 ### Limitations
 
