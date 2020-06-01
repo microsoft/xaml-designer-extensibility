@@ -6,7 +6,7 @@ This approach requires registering with the Toolbox Controls Installer (TCI) in 
 
 ### Limitations
 
-* This approach only works reliably for WPF .NET Framework assemblies. The controls in registered assemblies are enumerated via .NET Reflection which does not work reliably on .NET Core assemblies within a .NET Framework process such as Visual Studio.
+* This approach is only supported for WPF .NET Framework assemblies.
 * Since registration requires modifying the registry, you need to provide an installer of some sort.
 
 ## Toolbox items from referenced NuGet packages (Visual Studio 15.0 and later)
@@ -17,11 +17,11 @@ You can try this by adding a reference to your own package or to [our WPF .NET C
 
 ### Target Framework-specific Manifests
 
-In Visual Studio 16.6 and later, Toolbox population supports multiple VisualStudioToolsManifest.xml files per package -- the maniest in the tools root plus additional manifests for specific Target Framework Monikers (TFMs) in subdirectories of tools. The Toolbox will show the items from the manifest that best matches the target framework of the current project, falling back to the manifest in the tools root if there is no better match. The manifest in the tools root is also required for compatibility with older versions of Visual Studio.
+In Visual Studio 16.6 and later, Toolbox population supports multiple VisualStudioToolsManifest.xml files per package -- the manifest in the tools root plus additional manifests for specific Target Framework Monikers (TFMs) in subdirectories of tools. The Toolbox will show the items from the manifest that best matches the target framework of the current project, falling back to the manifest in the tools root if there is no better match. The manifest in the tools root is also required for compatibility with older versions of Visual Studio.
 
 Here's an example:
 
-| File path                                         | Will be used for projects targetting...                     |
+| File path                                         | Will be used for projects targeting...                      |
 | :------------------------------------------------ | :---------------------------------------------------------- |
 | \tools\net47\VisualStudioToolsManifest.xml        | .NET Framework >= 4.7                                       |
 | \tools\netcoreapp31\VisualStudioToolsManifest.xml | .NET Core >= 3.1                                            |
@@ -29,7 +29,7 @@ Here's an example:
 
 ## Toolbox items from unreferenced NuGet packages (Visual Studio 16.7 Preview 2 and later)
 
-If a NuGet package in a NuGet fallback folder contains a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls), Toolbox will show the Toolbox items listed in the manifest for any project that is compatible with the package, even projects that do not reference that package.
+If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-started) section below) contains a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls), Toolbox will show the Toolbox items listed in the manifest for any project that is compatible with the package, even projects that do not reference that package.
 
 ### Limitations of the fallback folder approach
 
@@ -70,7 +70,7 @@ If a NuGet package in a NuGet fallback folder contains a [tools\VisualStudioTool
 9. Open the Toolbox pane
 10. Wait for both the Toolbox and XAML designer to finish initializing.
 11. The Toolbox items defined in tools\VisualStudioToolsManifest.xml should appear in the Toolbox. If you're using our sample project, you should see a CustomControlLibrary.WpfCore tab in Toolbox containing a Toolbox item for the CustomButton control.
-12. Double-click one of the Toolbox items to add a control of that type to the XAML file.
+12. Double-click one of the Toolbox items to add a control of that type to the XAML file and add a package reference for the NuGet package to the project.
 
 ## How to build our WPF .NET Core sample package
 
