@@ -34,7 +34,7 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 ### Limitations of the fallback folder approach
 
 * It currently only supports WPF .NET Core packages and projects.
-* It only supports one manifest per package, in the root of the tools directory. [Manifests for specific Target Framework Monikers](#target-framework-specific-manifests) are not supported.
+* It currently only supports one manifest per package, in the root of the tools directory. [Manifests for specific Target Framework Monikers](#target-framework-specific-manifests) are not supported.
 
 ### Known issues in 16.7 Preview 2
 
