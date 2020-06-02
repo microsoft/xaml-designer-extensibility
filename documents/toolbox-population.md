@@ -83,6 +83,6 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 ## How to build our WPF .NET Core sample package
 
 1. Clone [this repo](https://github.com/microsoft/xaml-designer-extensibility).
-2. Open samples\CustomControlLibrary.WpfCore\CustomControlLibrary.WpfCore.sln in Visual Studio.
+2. Open [...\samples\CustomControlLibrary.WpfCore\CustomControlLibrary.WpfCore.sln](../samples/CustomControlLibrary.WpfCore/CustomControlLibrary.WpfCore.sln) in Visual Studio.
 3. Build the solution.
 4. Generate the package (bin\Debug\CustomControlLibrary.WpfCore.1.0.0.nupkg) by right-clicking on the CustomControlLibrary.WpfCore project in Solution Explorer and selecting Pack, or by running the following command from the directory containing CustomControlLibrary.WpfCore.csproj: msbuild /t:Pack
