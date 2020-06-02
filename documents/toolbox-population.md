@@ -29,11 +29,11 @@ In Visual Studio 16.6 and later, Toolbox population supports multiple VisualStud
 
 Here's an example:
 
-| File path                                         | Will be used for projects targeting...                      |
-| :------------------------------------------------ | :---------------------------------------------------------- |
-| \tools\net47\VisualStudioToolsManifest.xml        | .NET Framework >= 4.7                                       |
-| \tools\netcoreapp31\VisualStudioToolsManifest.xml | .NET Core >= 3.1                                            |
-| \tools\VisualStudioToolsManifest.xml              | .NET Framework < 4.7, .NET Core < 3.1, and other frameworks |
+| File path                                        | Will be used for projects targeting...                      |
+| :----------------------------------------------- | :---------------------------------------------------------- |
+| tools\net47\VisualStudioToolsManifest.xml        | .NET Framework >= 4.7                                       |
+| tools\netcoreapp31\VisualStudioToolsManifest.xml | .NET Core >= 3.1                                            |
+| tools\VisualStudioToolsManifest.xml              | .NET Framework < 4.7, .NET Core < 3.1, and other frameworks |
 
 ## Toolbox items from unreferenced NuGet packages
 
