@@ -1,0 +1,7 @@
+﻿<FileList>
+  <File Reference="CustomControlLibrary.WpfCore.dll">
+    <ToolboxItems VSCategory="CustomControlLibrary.WpfCore" BlendCategory="CustomControlLibrary.WpfCore">
+      <Item Type="CustomControlLibrary.WpfCore.CustomButton" />
+    </ToolboxItems>
+  </File>
+</FileList>
