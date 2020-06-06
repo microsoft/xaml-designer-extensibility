@@ -52,7 +52,7 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 
 ### Getting started
 
-1. Create a NuGet package containing WPF .NET Core controls and a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls). You could create your own package, or [build our sample package](#how-to-build-our-wpf-net-core-sample-package).
+1. Create a NuGet package containing WPF .NET Core controls and a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls). Note that a UIFramework="WPF" attribute is required on ToolboxItems nodes on Visual Studio 16.7 Preview 3 or above. You could create your own package, or [build our sample package](#how-to-build-our-wpf-net-core-sample-package).
 2. Create a new directory somewhere on disk to serve as your NuGet fallback folder.
 3. Create a new text file with the extension .config (ex. MyFallbackFolder.config) in %ProgramFiles(x86)%\NuGet\Config.
 4. Add the following XML to the .config file, replacing c:\MyFallbackFolder with the actual path to your fallback folder.
