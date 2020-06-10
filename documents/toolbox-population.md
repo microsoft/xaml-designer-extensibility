@@ -53,36 +53,38 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 ### Getting started
 
 1. Create a NuGet package containing WPF .NET Core controls and a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls). Note that a UIFramework="WPF" attribute is required on ToolboxItems nodes on Visual Studio 16.7 Preview 3 or above. You could create your own package, or [build our sample package](#how-to-build-our-wpf-net-core-sample-package).
-2. Create a new directory somewhere on disk to serve as your NuGet fallback folder.
-3. Create a new text file with the extension .config (ex. MyFallbackFolder.config) in %ProgramFiles(x86)%\NuGet\Config.
-4. Add the following XML to the .config file, replacing c:\MyFallbackFolder with the actual path to your fallback folder.
+1. Create a new directory somewhere on disk to serve as your NuGet fallback folder.
+1. Create a new text file with the extension .config (ex. MyFallbackFolder.config) in %ProgramFiles(x86)%\NuGet\Config.
+1. Add the following XML to the .config file:
 
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
     <configuration>
       <fallbackPackageFolders>
-        <add key="FallbackFolderTest" value="c:\MyFallbackFolder" />
+        <add key="My Unique Key" value="c:\MyFallbackFolder" />
       </fallbackPackageFolders>
     </configuration>
     ```
 
-5. Download nuget.exe as described [here](https://docs.microsoft.com/en-us/nuget/reference/nuget-exe-cli-reference).
-6. Expand your NuGet package into your fallback folder using the following command:
+1. Replace "c:\MyFallbackFolder" with the actual path to your fallback folder.
+1. Replace "My Unique Key" with some value that is unlikely to be used by other SDKs. Note that if two NuGet .config files declare fallbackPackageFolders with the same key attribute value, one of them will win and the other will be ignored. To avoid unexpected interactions between .config files, be they from different control vendors or different SDKs from the same vendor, you should pick key values that are unlikely to be used by others. For example, consider combining your company and SDK names.
+1. Download nuget.exe as described [here](https://docs.microsoft.com/en-us/nuget/reference/nuget-exe-cli-reference).
+1. Expand your NuGet package into your fallback folder using the following command:
 
     ```bat
     nuget.exe add <path to your nupkg> -Source <path to your fallback folder> -Expand
     ```
 
-7. Launch Visual Studio 16.7 Preview 2 or later.
-8. Create a new WPF .NET Core project.
-9. Open the Toolbox pane
-10. Wait for both the Toolbox and XAML designer to finish initializing.
-11. The Toolbox items defined in tools\VisualStudioToolsManifest.xml should appear in the Toolbox. If you're using our sample project, you should see a CustomControlLibrary.WpfCore tab in Toolbox containing a Toolbox item for the CustomButton control.
-12. Double-click one of the Toolbox items to add a control of that type to the XAML file and add a package reference for the NuGet package to the project.
+1. Launch Visual Studio 16.7 Preview 2 or later.
+1. Create a new WPF .NET Core project.
+1. Open the Toolbox pane
+1. Wait for both the Toolbox and XAML designer to finish initializing.
+1. The Toolbox items defined in tools\VisualStudioToolsManifest.xml should appear in the Toolbox. If you're using our sample project, you should see a CustomControlLibrary.WpfCore tab in Toolbox containing a Toolbox item for the CustomButton control.
+1. Double-click one of the Toolbox items to add a control of that type to the XAML file and add a package reference for the NuGet package to the project.
 
 ## How to build our WPF .NET Core sample package
 
 1. Clone [this repo](https://github.com/microsoft/xaml-designer-extensibility).
-2. Open [...\samples\CustomControlLibrary.WpfCore\CustomControlLibrary.WpfCore.sln](../samples/CustomControlLibrary.WpfCore/CustomControlLibrary.WpfCore.sln) in Visual Studio.
-3. Build the solution.
-4. Generate the package (bin\Debug\CustomControlLibrary.WpfCore.1.0.0.nupkg) by right-clicking on the CustomControlLibrary.WpfCore project in Solution Explorer and selecting Pack, or by running the following command from the directory containing CustomControlLibrary.WpfCore.csproj: msbuild /t:Pack
+1. Open [...\samples\CustomControlLibrary.WpfCore\CustomControlLibrary.WpfCore.sln](../samples/CustomControlLibrary.WpfCore/CustomControlLibrary.WpfCore.sln) in Visual Studio.
+1. Build the solution.
+1. Generate the package (bin\Debug\CustomControlLibrary.WpfCore.1.0.0.nupkg) by right-clicking on the CustomControlLibrary.WpfCore project in Solution Explorer and selecting Pack, or by running the following command from the directory containing CustomControlLibrary.WpfCore.csproj: msbuild /t:Pack
