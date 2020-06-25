@@ -1,6 +1,6 @@
 ## Suggested Actions Tokens
 
-Each action group and action could have assigned token of type `ActionToken`. Using this token, action group or action could be referenced and modified. Example:
+Each action group and action could have an assigned token of type `ActionToken`. Using this token, the corresponding action group or action can be referenced and modified. Example:
 ```CS
 this.GetGroupByToken(MyButtonSuggestedActionProvider.Token_Group_VisibilitySettings).IsVisible = false;
 

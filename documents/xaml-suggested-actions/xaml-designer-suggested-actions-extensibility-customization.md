@@ -1,23 +1,23 @@
 ## Suggested Actions Customization
 
-There are multiple ways you could customize the view of "XAML Suggested Actions":
+There are multiple ways that you can customize the view of "XAML Suggested Actions":
 
 ### 1. Action
 ![extensibility-migration-architecture](xaml-suggested-customAction.png)
 
-To make custom action use `CustomAction` class:
+To make a custom action use `CustomAction` class:
 
 ```cs
 public class MyCustomAction : CustomAction
 {
     private SuggestedActionsResources res = new SuggestedActionsResources();
     
-    public string MyCustomActionText { get; set; }
-    public ICommand ResetCommand { get; set; }
+    public string MyCustomActionText { get; }
+    public ICommand ResetCommand { get; }
     
     public MyCustomAction()
     {
-        this.Template = res["MyCutsomActionTemplate"] as ControlTemplate;
+        this.Template = res["MyCustomActionTemplate"] as ControlTemplate;
         this.MyCustomActionText = "Reset Content:";
         this.ResetCommand = new ResetCommandImpl();
     }
@@ -31,13 +31,16 @@ public class MyCustomAction : CustomAction
         }
         public void Execute(object parameter)
         {
-            (parameter as ModelItem).Content.SetValue("Content");
+            if (parameter is ModelItem modelItem)
+            {
+                modelItem.Content.SetValue("Content");
+            }
         }
     }
 }
 ```
 ```xml
-<ControlTemplate x:Key="MyCutsomActionTemplate">
+<ControlTemplate x:Key="MyCustomActionTemplate">
     <StackPanel Orientation="Vertical">
         <TextBlock Text="{Binding MyCustomActionText}"/>
         <Button Width="60" Height="20" Margin="2" HorizontalAlignment="Center"
@@ -74,7 +77,7 @@ public class MyCustomActionGroup : ActionGroup
 
     public MyCustomActionGroup()
     {
-        this.Template = res["MyCutsomActionGroupTemplate"] as ControlTemplate;
+        this.Template = res["MyCustomActionGroupTemplate"] as ControlTemplate;
     }
 
     public override void Initialize()
@@ -117,7 +120,7 @@ public class MyCustomActionGroup : ActionGroup
 }
 ```
 ```xml
-<ControlTemplate x:Key="MyCutsomActionGroupTemplate">
+<ControlTemplate x:Key="MyCustomActionGroupTemplate">
     <StackPanel Orientation="Vertical">
         <Control Template="{DynamicResource DefaultPropertyActionControlTemplate}"
                  DataContext="{Binding BackgroundProperty}"/>
@@ -154,7 +157,7 @@ public class MyCustomSuggestedActionProvider : SuggestedActionProvider
 
     public override string Header => "Custom SuggestedActionProvider";
     public override string Type => "System.Windows.Controls.Button";
-    public string ShortDocumentation { get; set; }
+    public string ShortDocumentation { get; }
 
     public override void Initialize(ModelItem modelItem)
     {
@@ -199,7 +202,7 @@ public class MyCustomActionProvider : ActionProviderBase
 
     public override string Header => "Documentation";
     public override string Type => "System.Windows.Controls.Grid";
-    public string Documentation { get; set; }
+    public string Documentation { get; }
 
     public override void Initialize(ModelItem modelItem)
     {

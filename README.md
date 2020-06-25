@@ -7,7 +7,7 @@ more recent surface isolation architecture. [This article](./documents/xaml-desi
 
 - [XAML designer extensibility migration](./documents/xaml-designer-extensibility-migration.md)
 - [Toolbox population](./documents/toolbox-population.md)
-- [XAML Suggested Actions Extensibility](./documents/xaml-suggested-actions/xaml-designer-suggested-actions-extensibility.md)
+- [Suggested Actions extensibility](./documents/xaml-suggested-actions/xaml-designer-suggested-actions-extensibility.md)
 
 ## Code Samples
 

@@ -13,7 +13,7 @@ public class ExampleBehaviorActionProvider : BehaviorActionProvider
     //Specify fully qualified type name of a class that implements a Behavior attached property
     public override string BehaviorPropertyTypeFullName => "Microsoft.Xaml.Behaviors.Interaction";
 
-    public override string Header => "Microsotf Xaml Behaviors";
+    public override string Header => "Microsoft Xaml Behaviors";
 
     //Specify full name of control type for which current provider is created.
     public override string Type => "System.Windows.FrameworkElement";

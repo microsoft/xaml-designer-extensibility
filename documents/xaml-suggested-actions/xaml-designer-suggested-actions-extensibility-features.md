@@ -1,6 +1,6 @@
 ## Suggested Actions Features
 
-Currently we have 5 types of actions that could be added:
+In 16.7 there are 5 types of actions that could be added:
 ## *PropertyAction*
 ```cs
 //Simple Property Editor will be shown
@@ -55,13 +55,13 @@ public class MyCustomAction : CustomAction
 {
     private SuggestedActionsResources res = new SuggestedActionsResources();
     
-    public string MyCustomActionText { get; set; }
-    public ICommand ResetCommand { get; set; }
+    public string MyCustomActionText { get; }
+    public ICommand ResetCommand { get; }
     
     public MyCustomAction()
     {
-        this.Template = res["MyCutsomActionTemplate"] as ControlTemplate;
-        this.MyCustomActionText = "Change Content oprions:";
+        this.Template = res["MyCustomActionTemplate"] as ControlTemplate;
+        this.MyCustomActionText = "Change Content options:";
         this.ResetCommand = new ResetCommandImpl();
     }
 
@@ -74,14 +74,17 @@ public class MyCustomAction : CustomAction
         }
         public void Execute(object parameter)
         {
-            (parameter as ModelItem).Content.SetValue("Content");
+            if (parameter is ModelItem modelItem)
+            {
+                modelItem.Content.SetValue("Content");
+            }
         }
     }
 }
 ```
 XAML from `SuggestedActionsResources` ResourceDictionary:
 ```xml
-<ControlTemplate x:Key="MyCutsomActionTemplate">
+<ControlTemplate x:Key="MyCustomActionTemplate">
     <StackPanel Orientation="Vertical">
         <TextBlock Text="{Binding MyCustomActionText}"/>
         <Button Width="60" Height="20" Margin="2" HorizontalAlignment="Center"
