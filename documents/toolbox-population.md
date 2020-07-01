@@ -44,11 +44,9 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 * It currently only supports WPF .NET Core packages and projects.
 * It currently only supports one manifest per package, in the root of the tools directory. [Manifests for specific Target Framework Monikers](#target-framework-specific-manifests) are not supported.
 
-### Known issues in 16.7 Preview 2
+### Known issues in 16.7 Preview 3
 
-* Custom icons are not supported yet.
-* Toolbox item names are indented.
-* After a package is referenced, Toolbox shows two copies of the Toolbox items.
+* Custom icons are not supported yet. This support is coming in Preview 4.
 
 ### Getting started
 
