@@ -107,12 +107,12 @@ public class MyCustomActionGroup : ActionGroup
         this.SetBackgroundToAction.Action = (color) =>
         {
             //Create SolidColorBrush
-            ModelItem solidColorBrush = ModelFactory.CreateItem(this.ModelItemContext, new TypeIdentifier("System.Windows.Media.SolidColorBrush"));
-            PropertyIdentifier colorPropertyIdentifier = new PropertyIdentifier(newTypeIdentifier("System.Windows.Media.SolidColorBrush"), "Color");
-            solidColorBrush.Properties[colorPropertyIdentifier].SetValue(colorToString());
+            ModelItem solidColorBrush = ModelFactory.CreateItem(this.ModelItem.Context, new TypeIdentifier("System.Windows.Media.SolidColorBrush"));
+            PropertyIdentifier colorPropertyIdentifier = new PropertyIdentifier(new TypeIdentifier("System.Windows.Media.SolidColorBrush"), "Color");
+            solidColorBrush.Properties[colorPropertyIdentifier].SetValue(color.ToString());
             //Set Background for control
-            PropertyIdentifier backgrounPropertyIdentifier = new PropertyIdentifie(new TypeIdentifier("System.Windows.Controls.Control"), "Background");
-            this.ModelItem.Properties[backgrounPropertyIdentifier].Collection.Ad(solidColorBrush);
+            PropertyIdentifier backgrounPropertyIdentifier = new PropertyIdentifier(new TypeIdentifier("System.Windows.Controls.Control"), "Background");
+            this.ModelItem.Properties[backgrounPropertyIdentifier].Collection.Add(solidColorBrush);
         };
         
         this.SetBackgroundToAction.SetActionProvider(this.ActionProvider);
