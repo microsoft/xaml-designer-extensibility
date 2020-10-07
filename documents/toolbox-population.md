@@ -44,12 +44,6 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 * It currently only supports WPF .NET Core packages and projects.
 * It currently only supports one manifest per package, in the root of the tools directory. [Manifests for specific Target Framework Monikers](#target-framework-specific-manifests) are not supported.
 
-### Known issues in 16.7 Preview 2
-
-* Custom icons are not supported yet.
-* Toolbox item names are indented.
-* After a package is referenced, Toolbox shows two copies of the Toolbox items.
-
 ### Getting started
 
 1. Create a NuGet package containing WPF .NET Core controls and a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls). Note that a UIFramework="WPF" attribute is required on ToolboxItems nodes on Visual Studio 16.7 Preview 3 or above. You could create your own package, or [build our sample package](#how-to-build-our-wpf-net-core-sample-package).
@@ -69,7 +63,7 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 1. Replace "c:\MyFallbackFolder" with the actual path to your fallback folder.
 1. Replace "My Unique Key" with some value that is unlikely to be used by other SDKs. Note that if two NuGet .config files declare fallbackPackageFolders with the same key attribute value, one of them will win and the other will be ignored. To avoid unexpected interactions between .config files, be they from different control vendors or different SDKs from the same vendor, you should pick key values that are unlikely to be used by others. For example, consider combining your company and SDK names.
 1. Download nuget.exe as described [here](https://docs.microsoft.com/en-us/nuget/reference/nuget-exe-cli-reference).
-1. Expand your NuGet package into your fallback folder using the following command:
+1. Expand your NuGet package into your fallback folder using the following command. It's important to use nuget.exe rather than simply unzipping your nupkg because nuget.exe will create a .nupkg.metadata file which is required for your package to be found during NuGet restore. When creating an installer for your SDK we recommend that you run nuget.exe on your build/dev machine and include the resulting expanded package layout in your installer, rather than running nuget.exe on the customer's machine.
 
     ```bat
     nuget.exe add <path to your nupkg> -Source <path to your fallback folder> -Expand
