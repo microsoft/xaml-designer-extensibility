@@ -1,6 +1,6 @@
 # Toolbox population
 
-There are several ways to get your XAML controls to appear in Visual Studio's Toolbox pane. Some of the approaches are outlined below. 
+There are several ways to get your XAML controls to appear in Visual Studio's Toolbox pane. Some of the approaches are outlined below.
 
 | Population mechanism                                                           | Supported Frameworks | Supported Visual Studio Versions       |
 | :----------------------------------------------------------------------------- | :------------------- | :------------------------------------- |
@@ -23,18 +23,6 @@ If a NuGet package referenced by a XAML project contains a [tools\VisualStudioTo
 
 You can try this by adding a reference to your own package or to [our WPF .NET Core sample package](#how-to-build-our-wpf-net-core-sample-package).
 
-### Target Framework-specific Manifests
-
-In Visual Studio 16.6 and later, Toolbox population supports multiple VisualStudioToolsManifest.xml files per package -- the manifest in the tools root plus additional manifests for specific Target Framework Monikers (TFMs) in subdirectories of tools. The Toolbox will show the items from the manifest that best matches the target framework of the current project, falling back to the manifest in the tools root if there is no better match. The manifest in the tools root is also required for compatibility with older versions of Visual Studio.
-
-Here's an example:
-
-| File path                                        | Will be used for projects targeting...                      |
-| :----------------------------------------------- | :---------------------------------------------------------- |
-| tools\net47\VisualStudioToolsManifest.xml        | .NET Framework >= 4.7                                       |
-| tools\netcoreapp31\VisualStudioToolsManifest.xml | .NET Core >= 3.1                                            |
-| tools\VisualStudioToolsManifest.xml              | .NET Framework < 4.7, .NET Core < 3.1, and other frameworks |
-
 ## Toolbox items from unreferenced NuGet packages
 
 If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-started) section below) contains a [tools\VisualStudioToolsManifest.xml file](https://docs.microsoft.com/en-us/nuget/guides/create-ui-controls), Toolbox will show the Toolbox items listed in the manifest for any project that is compatible with the package, even projects that do not reference that package.
@@ -42,7 +30,6 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 ### Limitations of the fallback folder approach
 
 * It currently only supports WPF .NET Core packages and projects.
-* It currently only supports one manifest per package, in the root of the tools directory. [Manifests for specific Target Framework Monikers](#target-framework-specific-manifests) are not supported.
 
 ### Getting started
 
@@ -75,6 +62,20 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 1. Wait for both the Toolbox and XAML designer to finish initializing.
 1. The Toolbox items defined in tools\VisualStudioToolsManifest.xml should appear in the Toolbox. If you're using our sample project, you should see a CustomControlLibrary.WpfCore tab in Toolbox containing a Toolbox item for the CustomButton control.
 1. Double-click one of the Toolbox items to add a control of that type to the XAML file and add a package reference for the NuGet package to the project.
+
+## TargetFramework-specific manifests
+
+Toolbox population supports multiple VisualStudioToolsManifest.xml files per package -- the manifest in the tools root plus additional manifests for specific Target Framework Monikers (TFMs) in subdirectories of tools. The Toolbox will show the items from the manifest that best matches the target framework of the current project, falling back to the manifest in the tools root if there is no better match. The manifest in the tools root is also required for compatibility with older versions of Visual Studio.
+
+For referenced NuGet packages, this feature requires Visual Studio 16.6 or later. For unreferenced NuGet packages, this feature requires Visual Studio 16.8 Preview 3 or later.  
+
+Here's an example:
+
+| File path                                        | Will be used for projects targeting...                      |
+| :----------------------------------------------- | :---------------------------------------------------------- |
+| tools\net47\VisualStudioToolsManifest.xml        | .NET Framework >= 4.7                                       |
+| tools\netcoreapp31\VisualStudioToolsManifest.xml | .NET Core >= 3.1                                            |
+| tools\VisualStudioToolsManifest.xml              | .NET Framework < 4.7, .NET Core < 3.1, and other frameworks |
 
 ## How to build our WPF .NET Core sample package
 
