@@ -1,6 +1,6 @@
 # Toolbox population
 
-There are several ways to get your XAML controls to appear in Visual Studio's Toolbox pane. Some of the approaches are outlined below. 
+There are several ways to get your XAML controls to appear in Visual Studio's Toolbox pane. Some of the approaches are outlined below.
 
 | Population mechanism                                                           | Supported Frameworks | Supported Visual Studio Versions       |
 | :----------------------------------------------------------------------------- | :------------------- | :------------------------------------- |
@@ -23,7 +23,7 @@ If a NuGet package referenced by a XAML project contains a [tools\VisualStudioTo
 
 You can try this by adding a reference to your own package or to [our WPF .NET Core sample package](#how-to-build-our-wpf-net-core-sample-package).
 
-### Target Framework-specific Manifests
+### Target Framework-specific manifests in referenced NuGet packages
 
 In Visual Studio 16.6 and later, Toolbox population supports multiple VisualStudioToolsManifest.xml files per package -- the manifest in the tools root plus additional manifests for specific Target Framework Monikers (TFMs) in subdirectories of tools. The Toolbox will show the items from the manifest that best matches the target framework of the current project, falling back to the manifest in the tools root if there is no better match. The manifest in the tools root is also required for compatibility with older versions of Visual Studio.
 
@@ -42,7 +42,6 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 ### Limitations of the fallback folder approach
 
 * It currently only supports WPF .NET Core packages and projects.
-* It currently only supports one manifest per package, in the root of the tools directory. [Manifests for specific Target Framework Monikers](#target-framework-specific-manifests) are not supported.
 
 ### Getting started
 
@@ -82,3 +81,7 @@ If a NuGet package in a NuGet fallback folder (see [Getting Started](#getting-st
 1. Open [...\samples\CustomControlLibrary.WpfCore\CustomControlLibrary.WpfCore.sln](../samples/CustomControlLibrary.WpfCore/CustomControlLibrary.WpfCore.sln) in Visual Studio.
 1. Build the solution.
 1. Generate the package (bin\Debug\CustomControlLibrary.WpfCore.1.0.0.nupkg) by right-clicking on the CustomControlLibrary.WpfCore project in Solution Explorer and selecting Pack, or by running the following command from the directory containing CustomControlLibrary.WpfCore.csproj: msbuild /t:Pack
+
+### Target Framework-specific manifests in unreferenced NuGet packages
+
+In Visual Studio 16.8 Preview 3 and later, fallback folder-based Toolbox population supports multiple VisualStudioToolsManifest.xml files per package. The behavior in this scenario is described [above](#target-framework-specific-manifests-in-referenced-nuget-packages).
