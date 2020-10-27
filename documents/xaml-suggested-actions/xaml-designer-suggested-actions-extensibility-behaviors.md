@@ -15,9 +15,6 @@ public class ExampleBehaviorActionProvider : BehaviorActionProvider
 
     public override string Header => "Microsoft Xaml Behaviors";
 
-    //Specify full name of control type for which current provider is created.
-    public override string Type => "System.Windows.FrameworkElement";
-
     //Set 'AppearsOnInheritedTypes' to 'true', so this provider will be shown for all types
     //inherited from 'System.Windows.FrameworkElement'
     public override bool AppearsOnInheritedTypes => true;
@@ -36,10 +33,11 @@ public class ExampleBehaviorActionProvider : BehaviorActionProvider
                                       new PropertyAction("SourceName"),
                                       new PropertyAction("SourceObject"),
                                       new PropertyAction("ActiveOnFocus")));
-                                      
+        
+        //Specify MaxCount to limit number of times the user is allowed to add this behavior                              
         this.AddGroup(new BehaviorActionGroup("Microsoft.Xaml.Behaviors.Core.TimerTrigger",
                                       new PropertyAction("MillisecondsPerTick"),
-                                      new PropertyAction("TotalTicks")));
+                                      new PropertyAction("TotalTicks")){ MaxCount = 1 });
     }
 }
 
@@ -48,9 +46,6 @@ public class ExampleBehaviorActionProvider : BehaviorActionProvider
 ### Metadata registration
 ```CS
 ...
-//Add SuggestionsAttribute to enabled "XAML Suggested Actions for control"
-builder.AddCustomAttributes("System.Windows.FrameworkElement", new SuggestionsAttribute());
-
 //Add Behavio provider
 builder.AddCustomAttributes("System.Windows.FrameworkElement", new FeatureAttribute(typeof(ExampleBehaviorActionProvider)));
 ...
