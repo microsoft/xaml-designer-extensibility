@@ -3,10 +3,13 @@
 - [Tokens](./xaml-designer-suggested-actions-extensibility-tokens.md)
 - [Features](./xaml-designer-suggested-actions-extensibility-features.md)
 - [Behaviors](./xaml-designer-suggested-actions-extensibility-behaviors.md)
+- [Non-Visual Elements](./xaml-designer-suggested-actions-extensibility-nonvisualelements.md)
 - [Customization](./xaml-designer-suggested-actions-extensibility-customization.md)
 
 In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Suggested Actions"
->*Note: this API will be available only in Preview Channel until feature is finalized and completed*
+>**Note:** This API is still in the preview stage and is available in Visual Studio 16.8 Preview versions. However, since this feature is not going to GA for 16.8, it will be disabled in 16.8 Preview 6 (due to our process of building the GA from the last Preview) and re-enabled in 16.9 Preview 1.
+>
+>Our current plan is to release it in 16.9, which is a long-term servicing release, allowing you time to adapt your delivery process. This plan is preliminary and could be changed based on feature completeness.
 
 To enable "Xaml Suggested Actions" for any control, a `SuggestedActionProvider` feature provider should be created and registered in metadata.
 
@@ -27,7 +30,6 @@ public class ExampleButtonSuggestedActionProvider : SuggestedActionProvider
     public static ActionToken Token_Property_IsDefault = new ActionToken(0x1002);
     public static ActionToken Token_Last = new ActionToken(0x10FF);
     public override string Header => "Actions";
-    public override string Type => "CustomControlLibrary.WpfCore.ExampleButton";
     public override void Initialize()
     {
         this.ShowNameProperty = true;
@@ -61,7 +63,6 @@ public class ExampleSimpleButtonSuggestedActionProvider : ExampleButtonSuggested
 {
     public static ActionToken Token_Property_CustomProp = ExampleButtonSuggestedActionProviderToken_Last + 1;
     public new static ActionToken Token_Last = new ActionToken(0x2FFF);
-    public override string Type => "CustomControlLibrary.WpfCore.ExampleSimpleButton";
     public override void Initialize()
     {
         base.Initialize();
@@ -91,14 +92,10 @@ public class ExampleSimpleButtonSuggestedActionProvider : ExampleButtonSuggested
 ### Metadata registration
 ```CS
 ...
-//Add SuggestionsAttribute to enabled "XAML Suggested Actions for control"
-builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleButton", new SuggestionsAttribute());
-
 //Add one provider
 builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleButton", new FeatureAttribute(typeof(ExampleButtonSuggestedActionProvider)));
 
 //Same for another control
-builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleSimpleButton", new SuggestionsAttribute());
 builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleSimpleButton", new FeatureAttribute(typeof(ExampleSimpleButtonSuggestedActionProvider)));
 ...
 ```
@@ -107,9 +104,33 @@ builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleSimpleButton", 
 ![extensibility-migration-architecture](xaml-suggested-actions-documentation.png)
 
 At the top of the Suggested Actions dialog in the designer there is a Type Name label.
-It could be used as a hyperlink to documentation. To enabled it, specify `DocumentationAttribute` in Metadata:
-```cs
-builder.AddCustomAttributes("System.Windows.Controls.ComboBox", 
-                            new DocumentationAttribute(helpLink: "https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.combobox"));
-```
->*If `DocumentationAttribute` has not been added, hyperlink will open documentation for the first parent class that has this attribute, otherwise Type Name label will be static*
+It could be used as a hyperlink to documentation. There are two ways to enable it:
+
+1. Specify `DocumentationAttribute` in Metadata:
+
+   ```csharp
+   builder.AddCustomAttributes("System.Windows.Controls.ComboBox", 
+                               new DocumentationAttribute(helpUrl: "https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.combobox"));
+   ```
+
+2. Create `DocumentationProvider` and register it in Metadata:
+
+   ```csharp
+   public class ButtonDocumentationProvider : DocumentationProvider
+   {
+       public override string GetHelpUrl(ModelItem modelItem)
+       {
+           return "https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/button";
+       }
+   }
+   
+   //Metatdata registration:
+   builder.AddCustomAttributes("System.Windows.Controls.Button",
+                               new FeatureAttribute(typeof(ButtonDocumentationProvider));
+   ```
+
+   
+
+>- If both `DocumentationAttribute`  and `DocumentationProvider` exist for the same type, `DocumentationAttribute`  will be used.
+>- `DocumentationAttribute`  will not be searched in parent classes.
+>- If `DocumentationProvider` has not been added, we will use the help URL from the first parent class that has this provider, otherwise the Type Name label will not be a hyperlink.

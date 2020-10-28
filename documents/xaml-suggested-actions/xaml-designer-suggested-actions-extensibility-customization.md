@@ -54,7 +54,6 @@ public class MyCustomAction : CustomAction
 public class ButtonCustomActionTemplateProvider : SuggestedActionProvider
 {
     public override string Header => "Custom Action";
-    public override string Type => "System.Windows.Controls.Button";
     public override void Initialize()
     {
         base.Initialize();
@@ -139,7 +138,6 @@ public class MyCustomActionGroup : ActionGroup
 public class ButtonCustomActionGroupTemplateProvider : SuggestedActionProvider
 {
     public override string Header => "Custom Action Group";
-    public override string Type => "System.Windows.Controls.Button";
     public override void Initialize()
     {
         base.Initialize();
@@ -156,7 +154,6 @@ public class MyCustomSuggestedActionProvider : SuggestedActionProvider
     private SuggestedActionsResources res = new SuggestedActionsResources();
 
     public override string Header => "Custom SuggestedActionProvider";
-    public override string Type => "System.Windows.Controls.Button";
     public string ShortDocumentation { get; }
 
     public override void Initialize(ModelItem modelItem)
@@ -201,7 +198,6 @@ public class MyCustomActionProvider : ActionProviderBase
     private SuggestedActionsResources res = new SuggestedActionsResources();
 
     public override string Header => "Documentation";
-    public override string Type => "System.Windows.Controls.Grid";
     public string Documentation { get; }
 
     public override void Initialize(ModelItem modelItem)
