@@ -133,4 +133,4 @@ It could be used as a hyperlink to documentation. There are two ways to enable i
 
 >- If both `DocumentationAttribute`  and `DocumentationProvider` exist for the same type, `DocumentationAttribute`  will be used.
 >- `DocumentationAttribute`  will not be searched in parent classes.
->- If `DocumentationProvider` has not been added, we will use help URL from the first parent class that has this provider, otherwise Type Name label will not be a hyperlink.
+>- If `DocumentationProvider` has not been added, we will use the help URL from the first parent class that has this provider, otherwise the Type Name label will not be a hyperlink.
