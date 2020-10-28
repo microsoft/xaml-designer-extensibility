@@ -104,7 +104,7 @@ builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleSimpleButton", 
 ![extensibility-migration-architecture](xaml-suggested-actions-documentation.png)
 
 At the top of the Suggested Actions dialog in the designer there is a Type Name label.
-It could be used as a hyperlink to documentation. There are two ways to enabled it:
+It could be used as a hyperlink to documentation. There are two ways to enable it:
 
 1. Specify `DocumentationAttribute` in Metadata:
 
@@ -132,5 +132,5 @@ It could be used as a hyperlink to documentation. There are two ways to enabled 
    
 
 >- If both `DocumentationAttribute`  and `DocumentationProvider` exist for the same type, `DocumentationAttribute`  will be used.
->- `DocumentationAttribute`  will not be searched in parent classes
->- If `DocumentationProvider` has not been added, help URL will be get from first parent class that has this provider, otherwise Type Name label will be static
+>- `DocumentationAttribute`  will not be searched in parent classes.
+>- If `DocumentationProvider` has not been added, we will use help URL from the first parent class that has this provider, otherwise Type Name label will not be a hyperlink.

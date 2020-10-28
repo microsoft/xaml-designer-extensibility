@@ -33,11 +33,14 @@ public class ExampleBehaviorActionProvider : BehaviorActionProvider
                                       new PropertyAction("SourceName"),
                                       new PropertyAction("SourceObject"),
                                       new PropertyAction("ActiveOnFocus")));
+        BehaviorActionGroup timeTriggerBehaviorActionGroup = 
+            new BehaviorActionGroup("Microsoft.Xaml.Behaviors.Core.TimerTrigger",
+                                      new PropertyAction("MillisecondsPerTick"),
+                                      new PropertyAction("TotalTicks"));
         
         //Specify MaxCount to limit number of times the user is allowed to add this behavior                              
-        this.AddGroup(new BehaviorActionGroup("Microsoft.Xaml.Behaviors.Core.TimerTrigger",
-                                      new PropertyAction("MillisecondsPerTick"),
-                                      new PropertyAction("TotalTicks")){ MaxCount = 1 });
+        timeTriggerBehaviorActionGroup.MaxCount = 1
+        this.AddGroup(timeTriggerBehaviorActionGroup);
     }
 }
 
