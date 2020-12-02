@@ -1,4 +1,7 @@
 ## Suggested Actions For Non-Visual Elements
+
+In Visual Studio 2019 16.9 Preview 1, we added support for displaying Suggested Actions on non-visual elements.
+
 To display Suggested Actions for a non-visual element, the designer needs to know where to place the Suggested Actions adorner. You can create a custom `ViewItemProvider` to provide this information and add it to the non-visual element alongside your `SuggestedActionProvider`.
 
 A `ViewItemProvider` implements one method, `GetViewItem`, which receives the non-visual element as a `ModelItem` and returns a `ViewItem`. This `ViewItem` describes the bounds the designer should use for the non-visual element when placing the Suggested Actions adorner.
@@ -12,7 +15,7 @@ public class MyNonVisualControlViewItemProvider : ViewItemProvider
     {
         // Find the first visual parent of the non-visual view-item.
         ModelItem parent = modelItem.Parent;
-        while(!parent.View.IsVisible)
+        while (!parent.View.IsVisible)
         {
             parent = parent.Parent;
         }
