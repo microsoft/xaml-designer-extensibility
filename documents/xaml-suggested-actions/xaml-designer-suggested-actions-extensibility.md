@@ -61,7 +61,7 @@ public class ExampleSimpleButton : ExampleButton { }
 ```CS
 public class ExampleSimpleButtonSuggestedActionProvider : ExampleButtonSuggestedActionProvider
 {
-    public static ActionToken Token_Property_CustomProp = ExampleButtonSuggestedActionProviderToken_Last + 1;
+    public static ActionToken Token_Property_CustomProp = ExampleButtonSuggestedActionProvider.Token_Last + 1;
     public new static ActionToken Token_Last = new ActionToken(0x2FFF);
     public override void Initialize()
     {
