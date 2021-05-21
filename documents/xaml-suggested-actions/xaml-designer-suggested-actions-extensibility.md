@@ -6,14 +6,11 @@
 - [Non-Visual Elements](./xaml-designer-suggested-actions-extensibility-nonvisualelements.md)
 - [Customization](./xaml-designer-suggested-actions-extensibility-customization.md)
 
-In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Suggested Actions"
->**Note:** This API is still in the preview stage and is available in Visual Studio 16.8 Preview versions. However, since this feature is not going to GA for 16.8, it will be disabled in 16.8 Preview 6 (due to our process of building the GA from the last Preview) and re-enabled in 16.9 Preview 1.
+In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Suggested Actions". The feature will be release for GA in 16.10.
 >
->Our current plan is to release it in 16.9, which is a long-term servicing release, allowing you time to adapt your delivery process. This plan is preliminary and could be changed based on feature completeness.
+To enable "Xaml Suggested Actions" for any control, you can create a `SuggestedActionProvider` feature provider ([example](#provider-example)) and register it in metadata ([example](#metadata-example)).
 
-To enable "Xaml Suggested Actions" for any control, a `SuggestedActionProvider` feature provider should be created and registered in metadata.
-
->*A Control could have multiple Suggested Actions providers. Each provider will be shown as a separate tab in the Suggested Actions UI.*
+>*A Control can have multiple Suggested Actions providers. Each provider will be shown as a separate tab in the Suggested Actions UI.*
 
 Example:
 ```cs
@@ -22,18 +19,20 @@ public class ExampleButton : Button { }
 
 ![extensibility-migration-architecture](xaml-suggested-actions.png)
 
-### Implementation for example above:
+### Implementation for Example Above {#provider-example}
 ```CS
 public class ExampleButtonSuggestedActionProvider : SuggestedActionProvider
 {
     public static ActionToken Token_Property_IsCancel = new ActionToken(0x1001);
     public static ActionToken Token_Property_IsDefault = new ActionToken(0x1002);
     public static ActionToken Token_Last = new ActionToken(0x10FF);
+    
     public override string Header => "Actions";
-    public override void Initialize()
+    
+    public override void PrepareActions()
     {
-        this.ShowNameProperty = true;
-        base.Initialize();
+        this.ShowNameProperty = true; // TODO thsparks : Move into Initialize()? Is it even necessary? Does it work here?
+        base.PrepareActions();
         
         this.AddGroup(new ActionGroup(SuggestedActionProviderTokens.Token_Group_Common,
             new PropertyAction(SuggestedActionProviderTokens.Token_Property_Content, "Content"),
@@ -51,7 +50,9 @@ public class ExampleButtonSuggestedActionProvider : SuggestedActionProvider
     }
 }
 ```
-### Example for inherited controls
+### Inheriting Existing Providers Example
+Suggested Action Providers can also inherit existing providers. In the below example, the `ExampleSimpleButtonSuggestedActionProvider` extends the `ExampleButtonSuggestedActionProvider`, hides some of the unwanted actions, and adds a few additional actions of its own.
+
 ```cs
 public class ExampleSimpleButton : ExampleButton { }
 ```
@@ -61,41 +62,45 @@ public class ExampleSimpleButton : ExampleButton { }
 ```CS
 public class ExampleSimpleButtonSuggestedActionProvider : ExampleButtonSuggestedActionProvider
 {
+    // Compute the next token property using the last value set in  the provider we're inheriting.
     public static ActionToken Token_Property_CustomProp = ExampleButtonSuggestedActionProviderToken_Last + 1;
+
     public new static ActionToken Token_Last = new ActionToken(0x2FFF);
-    public override void Initialize()
+
+    public override void PrepareActions()
     {
-        base.Initialize();
-        //Hide Visibility Group
+        base.PrepareActions();
+
+        // Hide Visibility Group
         this.GetGroupByToken(SuggestedActionProviderTokens.Token_Group_VisibilitySettings).IsVisible =false;
         
-        //Hide IsDefault Property
+        // Hide IsDefault Property
         this.GetActionByToken(ExampleSimpleButtonSuggestedActionProvider.Token_Property_IsDefault)IsVisible = false;
         
-        //Add new Opacity (without Token) property after IsDefault (even if it was hidden before)
+        // Add new Opacity (without Token) property after IsDefault (even if it was hidden before)
         this.InsertAction(new PropertyAction("Opacity"), after:ExampleSimpleButtonSuggestedActionProvider.Token_Property_IsDefault);
         
-        //Add new Link Action after IsDefault - will be inserted after IsDefault, but before Opacity
+        // Add new Link Action after IsDefault - will be inserted after IsDefault, but before Opacity
         this.InsertAction(new LinkAction("New link", () => { }), after:ExampleSimpleButtonSuggestedActionProvider.Token_Property_IsDefault);
         
-        //Subscribe to ModelItem Property Changed Event to update view if needed
+        // Subscribe to ModelItem Property Changed Event to update view if needed
         this.ModelItemPropertyChanged +=ExampleSimpleButtonSuggestedActionProvider_ModelItemPropertyChanged;
     }
     
     private void ExampleSimpleButtonSuggestedActionProvider_ModelItemPropertyChanged(object sender,PropertyChangedEventArgs e)
     {
-        
+        // Do Work...
     }
 }
 ```
 
-### Metadata registration
+### Metadata registration  {#metadata-example}
 ```CS
 ...
-//Add one provider
+// Add one provider
 builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleButton", new FeatureAttribute(typeof(ExampleButtonSuggestedActionProvider)));
 
-//Same for another control
+// Same for another control
 builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleSimpleButton", new FeatureAttribute(typeof(ExampleSimpleButtonSuggestedActionProvider)));
 ...
 ```
@@ -103,8 +108,8 @@ builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleSimpleButton", 
 ### Documentation link
 ![extensibility-migration-architecture](xaml-suggested-actions-documentation.png)
 
-At the top of the Suggested Actions dialog in the designer there is a Type Name label.
-It could be used as a hyperlink to documentation. There are two ways to enable it:
+There is a Type Name label at the top of the Suggested Actions dialog.
+If desired, this can be used as a hyperlink to documentation. There are two ways to enable it:
 
 1. Specify `DocumentationAttribute` in Metadata:
 
@@ -124,7 +129,7 @@ It could be used as a hyperlink to documentation. There are two ways to enable i
        }
    }
    
-   //Metatdata registration:
+   // Metatdata registration:
    builder.AddCustomAttributes("System.Windows.Controls.Button",
                                new FeatureAttribute(typeof(ButtonDocumentationProvider));
    ```
