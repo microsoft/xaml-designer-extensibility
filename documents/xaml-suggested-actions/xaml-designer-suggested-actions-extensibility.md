@@ -8,7 +8,7 @@
 
 In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Suggested Actions". The feature will be release for GA in 16.10.
 >
-To enable "Xaml Suggested Actions" for any control, you can create a `SuggestedActionProvider` feature provider ([example](#provider-example)) and register it in metadata ([example](#metadata-example)).
+To enable "Xaml Suggested Actions" for any control, you can create a `SuggestedActionProvider` feature provider ([example](#implementation-for-example-above)) and register it in metadata ([example](#metadata-registration)).
 
 >*A Control can have multiple Suggested Actions providers. Each provider will be shown as a separate tab in the Suggested Actions UI.*
 
@@ -19,7 +19,7 @@ public class ExampleButton : Button { }
 
 ![extensibility-migration-architecture](xaml-suggested-actions.png)
 
-### <a name="provider-example"></a>Implementation for Example Above
+### Implementation for Example Above
 ```CS
 public class ExampleButtonSuggestedActionProvider : SuggestedActionProvider
 {
@@ -96,7 +96,7 @@ public class ExampleSimpleButtonSuggestedActionProvider : ExampleButtonSuggested
 }
 ```
 
-### <a name="metadata-example"></a>Metadata registration
+### Metadata Registration
 ```CS
 ...
 // Add one provider
