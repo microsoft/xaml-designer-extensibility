@@ -31,7 +31,7 @@ public class ExampleButtonSuggestedActionProvider : SuggestedActionProvider
     
     public override void PrepareActions()
     {
-        this.ShowNameProperty = true; // TODO thsparks : Move into Initialize()? Is it even necessary? Does it work here?
+        this.ShowNameProperty = true;
         base.PrepareActions();
         
         this.AddGroup(new ActionGroup(SuggestedActionProviderTokens.Token_Group_Common,
