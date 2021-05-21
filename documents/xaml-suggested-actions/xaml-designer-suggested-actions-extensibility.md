@@ -19,7 +19,7 @@ public class ExampleButton : Button { }
 
 ![extensibility-migration-architecture](xaml-suggested-actions.png)
 
-### Implementation for Example Above {#provider-example}
+### <a name="provider-example"></a>Implementation for Example Above
 ```CS
 public class ExampleButtonSuggestedActionProvider : SuggestedActionProvider
 {
@@ -31,7 +31,9 @@ public class ExampleButtonSuggestedActionProvider : SuggestedActionProvider
     
     public override void PrepareActions()
     {
+        // Whether or not to display the Name textbox at the top of the tab
         this.ShowNameProperty = true;
+
         base.PrepareActions();
         
         this.AddGroup(new ActionGroup(SuggestedActionProviderTokens.Token_Group_Common,
@@ -94,7 +96,7 @@ public class ExampleSimpleButtonSuggestedActionProvider : ExampleButtonSuggested
 }
 ```
 
-### Metadata registration  {#metadata-example}
+### <a name="metadata-example"></a>Metadata registration
 ```CS
 ...
 // Add one provider
