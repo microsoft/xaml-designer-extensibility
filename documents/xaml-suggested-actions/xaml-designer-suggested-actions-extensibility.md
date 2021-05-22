@@ -10,9 +10,9 @@ In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Su
 >
 To enable "Xaml Suggested Actions" for any control, you can create a `SuggestedActionProvider` feature provider ([example](#implementation-for-example-above)) and register it in metadata ([example](#metadata-registration)).
 
->*A Control can have multiple Suggested Actions providers. Each provider will be shown as a separate tab in the Suggested Actions UI.*
+A Control can have multiple Suggested Actions providers. Each provider will be shown as a separate tab in the Suggested Actions UI.
 
-Example:
+### Example Suggested Action Panel
 ```cs
 public class ExampleButton : Button { }
 ```
