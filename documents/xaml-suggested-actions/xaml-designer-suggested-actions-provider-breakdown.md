@@ -117,5 +117,6 @@ public class ButtonActionProvider : SuggestedActionProvider
     }
 }
 ```
-
 *Note: Not shown here, `SuggestedActionProvider` also contains a` GetPromotedActions()` function that can be overriden. **This is not currently supported and should not be used.***
+
+For more information on Token_Last and inheriting an existing provider, see [Provider Inheritance](./xaml-designer-suggested-actions-provider-inheritance.md).

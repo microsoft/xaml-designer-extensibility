@@ -1,7 +1,9 @@
 ## Suggested Actions Extensibility
 
+- [SuggestedActionProvider Breakdown](./xaml-designer-suggested-actions-provider-breakdown.md)
 - [Tokens](./xaml-designer-suggested-actions-extensibility-tokens.md)
 - [Features](./xaml-designer-suggested-actions-extensibility-features.md)
+- [Provider Inheritance](./xaml-designer-suggested-actions-provider-inheritance.md)
 - [Behaviors](./xaml-designer-suggested-actions-extensibility-behaviors.md)
 - [Non-Visual Elements](./xaml-designer-suggested-actions-extensibility-nonvisualelements.md)
 - [Customization](./xaml-designer-suggested-actions-extensibility-customization.md)
@@ -51,50 +53,6 @@ public class ExampleButtonSuggestedActionProvider : SuggestedActionProvider
         this.AddGroup(new FontSettingsActionGroup());
     }
 }
-```
-### Inheriting Existing Providers Example
-Suggested Action Providers can also inherit existing providers. In the below example, the `ExampleSimpleButtonSuggestedActionProvider` extends the `ExampleButtonSuggestedActionProvider`, hides some of the unwanted actions, and adds a few additional actions of its own.
-
-```cs
-public class ExampleSimpleButton : ExampleButton { }
-```
-
-![extensibility-migration-architecture](xaml-suggested-actions-2.png)
-
-```CS
-public class ExampleSimpleButtonSuggestedActionProvider : ExampleButtonSuggestedActionProvider
-{
-    // Compute the next token property using the last value set in  the provider we're inheriting.
-    public static ActionToken Token_Property_CustomProp = ExampleButtonSuggestedActionProviderToken_Last + 1;
-
-    public new static ActionToken Token_Last = new ActionToken(0x2FFF);
-
-    public override void PrepareActions()
-    {
-        base.PrepareActions();
-
-        // Hide Visibility Group
-        this.GetGroupByToken(SuggestedActionProviderTokens.Token_Group_VisibilitySettings).IsVisible =false;
-        
-        // Hide IsDefault Property
-        this.GetActionByToken(ExampleSimpleButtonSuggestedActionProvider.Token_Property_IsDefault)IsVisible = false;
-        
-        // Add new Opacity (without Token) property after IsDefault (even if it was hidden before)
-        this.InsertAction(new PropertyAction("Opacity"), after:ExampleSimpleButtonSuggestedActionProvider.Token_Property_IsDefault);
-        
-        // Add new Link Action after IsDefault - will be inserted after IsDefault, but before Opacity
-        this.InsertAction(new LinkAction("New link", () => { }), after:ExampleSimpleButtonSuggestedActionProvider.Token_Property_IsDefault);
-        
-        // Subscribe to ModelItem Property Changed Event to update view if needed
-        this.ModelItemPropertyChanged +=ExampleSimpleButtonSuggestedActionProvider_ModelItemPropertyChanged;
-    }
-    
-    private void ExampleSimpleButtonSuggestedActionProvider_ModelItemPropertyChanged(object sender,PropertyChangedEventArgs e)
-    {
-        // Do Work...
-    }
-}
-```
 
 ### Metadata Registration
 ```CS
