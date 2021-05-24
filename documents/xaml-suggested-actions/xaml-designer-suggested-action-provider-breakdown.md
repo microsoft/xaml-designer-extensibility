@@ -8,7 +8,7 @@ The SuggestedActionProvider is at the core of implementing custom Suggested Acti
 
 ### Actions and Action Groups
 
-Each provider contains a set of ActionGroups, which themselves contain Actions. These Actions are what appear as property editors in the tab content. If you need to refer to an Action or ActionGroup programmatically, you can assign them [Action Tokens](./xaml-designer-suggested-actions-extensibility-tokens.md).
+Each provider contains a set of ActionGroups, which themselves contain Actions. These Actions are what appear as property editors in the tab content. Groups are separated by a horizontal line in the tab content. If you need to refer to an Action or ActionGroup programmatically, you can assign it an [Action Token](./xaml-designer-suggested-actions-extensibility-tokens.md).
 
 For a list of available pre-made actions, see [Features](./xaml-designer-suggested-actions-extensibility-features.md). To learn about creating custom actions, see [Customization](./xaml-designer-suggested-actions-extensibility-customization.md).
 
@@ -16,7 +16,7 @@ If a SuggestedActionProvider does not contain any visible actions after `Prepare
 
 ### Sample Implementation
 
-Below is the code for a sample provider (pictured above) with comments to explain what each aspect of the class does.
+Below is the code for a sample provider ("Actions" pictured above) with comments to explain what each aspect of the class does.
 ```cs
 public class ButtonActionProvider : SuggestedActionProvider
 {
@@ -61,7 +61,7 @@ public class ButtonActionProvider : SuggestedActionProvider
     /// Lower numbers appear first.
     /// Note that your provider's position must be above ActionProviderBase.MinimumAllowablePosition or it will be ignored.
     /// 
-    /// Note: This field was added in 16.10 Preview 3.
+    /// Note: This field was not added until 16.10 Preview 3.
     /// </summary>
     public override int Position => ActionProviderBase.MinimumAllowablePosition + 1;
 
@@ -70,7 +70,7 @@ public class ButtonActionProvider : SuggestedActionProvider
     ///
     /// Note that, in general, an empty provider simply will not be added as a tab.
     /// This string is only used if the provider begins with content, but becomes empty
-    /// as a result of some action performed while the popup is open.
+    /// as a result of RemoveAction(...) calls performed while the popup is open.
     /// </summary>
     public override string OnEmptyDisplayString => "No More Actions";
 
@@ -98,9 +98,6 @@ public class ButtonActionProvider : SuggestedActionProvider
 
         base.PrepareActions();
 
-        // Actions within an Action Group are visually separated from actions in
-        // other groups via a horizontal separator in the tab content.
-
         // Note: You must use AddGroup (or AddAction) when adding actions to your provider.
         // *Do not* add them directly to this.ActionGroups.
         this.AddGroup(new ActionGroup(ButtonActionProvider.Token_Group_Common,
@@ -120,7 +117,5 @@ public class ButtonActionProvider : SuggestedActionProvider
     }
 }
 ```
-
-*Note: The `Position` field was added in 16.10 Preview 3.*
 
 *Note: Not shown here, `SuggestedActionProvider` also contains a` GetPromotedActions()` function that can be overriden. **This is not currently supported and should not be used.***
