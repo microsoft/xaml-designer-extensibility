@@ -1,4 +1,4 @@
-## Suggested Actions - Behaviors
+## Quick Actions - Behaviors
 
 ![extensibility-migration-architecture](xaml-suggested-actions-no-behaviors.png)
 

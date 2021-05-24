@@ -1,6 +1,8 @@
-## Suggested Actions Extensibility
+## Quick Actions Extensibility
 
-In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Suggested Actions". The feature will be release for GA in 16.10.
+In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Designer Quick Actions". The feature will be release for GA in 16.10.
+
+>**Note:** While this feature is documented as "Quick Actions", it is referred to as "Suggested Actions" in our code. As such, you will see "Suggested Actions" used frequently throughout the code and samples below.
 
 ### Table of Contents
 1. [Suggested Action Providers](#Suggested-Action-Providers)
@@ -12,10 +14,9 @@ In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Su
 
 ### Suggested Action Providers
 
->
-To enable "Xaml Suggested Actions" for any control, you can create a `SuggestedActionProvider` feature provider ([example](#sample-implementation)) and register it in metadata ([example](#metadata-registration)).
+To enable "Xaml Quick Actions" for any control, you can create a `SuggestedActionProvider` feature provider ([example](#sample-implementation)) and register it on that control in metadata ([example](#metadata-registration)).
 
-The `SuggestedActionProvider` is at the core of implementing custom Suggested Actions. A control can have multiple Suggested Actions providers, and each will be shown as a separate tab in the Suggested Actions UI. For example, in the image below, there are two providers: "Actions" and  "Microsoft Xaml Behaviors".
+The `SuggestedActionProvider` is at the core of implementing custom Quick Actions. A control can have multiple Suggested Actions providers, and each will be shown as a separate tab in the Quick Actions UI. For example, in the image below, there are two providers: "Actions" and  "Microsoft Xaml Behaviors".
 
 ![Example Suggested Action Popup](xaml-suggested-actions.png)
 
@@ -130,7 +131,7 @@ public class ButtonActionProvider : SuggestedActionProvider
     }
 }
 ```
-*Note: Not shown here, `SuggestedActionProvider` also contains a `GetPromotedActions()` function that can be overriden. **This is not currently supported and should not be used.***
+> **Note:** Not shown here, `SuggestedActionProvider` also contains a `GetPromotedActions()` function that can be overriden. **This is not currently supported and should not be used.**
 
 For more information on Token_Last and inheriting an existing provider, see [Provider Inheritance](./xaml-designer-suggested-actions-provider-inheritance.md).
 
@@ -150,7 +151,7 @@ builder.AddCustomAttributes("CustomControlLibrary.WpfCore.ExampleSimpleButton", 
 ### Documentation Link
 ![extensibility-migration-architecture](xaml-suggested-actions-documentation.png)
 
-There is a Type Name label at the top of the Suggested Actions dialog.
+There is a Type Name label at the top of the Quick Actions dialog.
 If desired, this can be used as a hyperlink to documentation. There are two ways to enable it:
 
 1. Specify `DocumentationAttribute` in Metadata:
