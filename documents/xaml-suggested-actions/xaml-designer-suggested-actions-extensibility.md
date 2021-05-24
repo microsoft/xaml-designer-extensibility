@@ -1,35 +1,27 @@
 ## Suggested Actions Extensibility
 
-### Table of Contents
-1. [Overview](#Overview)
-2. [Screenshot](#Screenshot)
-3. [Suggested Action Providers](#Suggested-Action-Providers)
-4. [Actions and Action Groups](#Actions-and-Action-Groups)
-5. [Sample Implementation](#Sample-Implementation)
-6. [Metadata Registration](#Metadata-Registration)
-7. [Documentation Link](#Documentation-Link)
-8. [Further Reading](#Further-Reading)
-
-### Overview
-
 In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Suggested Actions". The feature will be release for GA in 16.10.
->
-To enable "Xaml Suggested Actions" for any control, you can create a `SuggestedActionProvider` feature provider ([example](#sample-implementation)) and register it in metadata ([example](#metadata-registration)).
 
-A Control can have multiple Suggested Actions providers. Each provider will be shown as a separate tab in the Suggested Actions UI.
-
-### Screenshot
-
-![Example Suggested Action Popup](xaml-suggested-actions.png)
-
+### Table of Contents
+1. [Suggested Action Providers](#Suggested-Action-Providers)
+2. [Actions and Action Groups](#Actions-and-Action-Groups)
+3. [Sample Implementation](#Sample-Implementation)
+4. [Metadata Registration](#Metadata-Registration)
+5. [Documentation Link](#Documentation-Link)
+6. [Further Reading](#Further-Reading)
 
 ### Suggested Action Providers
 
-The `SuggestedActionProvider` is at the core of implementing custom Suggested Actions for your own control. Each provider assigned to a control appears as a tab within the Suggested Actions UI. For example, in the image above, there are two providers: "Actions" and  "Microsoft Xaml Behaviors".
+>
+To enable "Xaml Suggested Actions" for any control, you can create a `SuggestedActionProvider` feature provider ([example](#sample-implementation)) and register it in metadata ([example](#metadata-registration)).
+
+The `SuggestedActionProvider` is at the core of implementing custom Suggested Actions. A control can have multiple Suggested Actions providers, and each will be shown as a separate tab in the Suggested Actions UI. For example, in the image below, there are two providers: "Actions" and  "Microsoft Xaml Behaviors".
+
+![Example Suggested Action Popup](xaml-suggested-actions.png)
 
 ### Actions and Action Groups
 
-Each provider contains a set of ActionGroups, which themselves contain Actions. These Actions are what appear as property editors in the tab content. Groups are separated by a horizontal line in the tab content. If you need to refer to an Action or ActionGroup programmatically, you can assign it an [Action Token](./xaml-designer-suggested-actions-extensibility-tokens.md).
+Each provider contains a set of ActionGroups, which themselves contain Actions. These Actions are what appear as property editors in the tab content. Groups are separated by a horizontal line. If you need to refer to an Action or ActionGroup programmatically, you can assign it an [Action Token](./xaml-designer-suggested-actions-extensibility-tokens.md).
 
 For a list of available pre-made actions, see [Features](./xaml-designer-suggested-actions-extensibility-features.md). To learn about creating custom actions, see [Customization](./xaml-designer-suggested-actions-extensibility-customization.md).
 
