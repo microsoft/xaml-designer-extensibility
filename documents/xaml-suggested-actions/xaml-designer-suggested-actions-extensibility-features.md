@@ -1,4 +1,4 @@
-## Suggested Actions Features
+## Quick Actions Features
 
 In 16.7 there are 5 types of actions that could be added:
 ## *PropertyAction*
