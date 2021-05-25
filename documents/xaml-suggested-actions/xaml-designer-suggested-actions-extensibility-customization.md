@@ -87,7 +87,7 @@ public class MyCustomActionGroup : ActionGroup
         this.Actions.Add(new PropertyAction("Height"));
 
         this.BackgroundProperty = new PropertyAction("BorderBrush");
-        //IMPORTANT: If action is a direct child of ActionGroup, this call is required after creating of action to correctly prepare it.
+        //IMPORTANT: If action is a direct child of ActionGroup, this call is required after creation of the action to prepare it correctly.
         this.BackgroundProperty.SetActionProvider(this.ActionProvider);
         
         this.HelpLinkAction = new LinkAction("Help", () => { Process.Start("https:/github.com/microsoft/xaml-designer-extensibility"); });

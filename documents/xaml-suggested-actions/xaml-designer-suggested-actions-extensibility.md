@@ -1,6 +1,6 @@
 ## Quick Actions Extensibility
 
-In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Designer Quick Actions". The feature will be release for GA in 16.10.
+In Visual Studio 2019 16.7 Preview 3 we added extensibility support for "XAML Designer Quick Actions". The feature is part of the 16.10 GA release.
 
 >**Note:** While this feature is documented as "Quick Actions", it is referred to as "Suggested Actions" in our code. As such, you will see "Suggested Actions" used frequently throughout the code and samples below.
 
