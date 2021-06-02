@@ -1,6 +1,6 @@
-## Suggested Actions Customization
+## Quick Actions Customization
 
-There are multiple ways that you can customize the view of "XAML Suggested Actions":
+There are multiple ways to customize the view of "XAML Quick Actions":
 
 ### 1. Action
 ![extensibility-migration-architecture](xaml-suggested-customAction.png)
@@ -79,15 +79,15 @@ public class MyCustomActionGroup : ActionGroup
         this.Template = res["MyCustomActionGroupTemplate"] as ControlTemplate;
     }
 
-    public override void Initialize()
+    public override void PrepareActions()
     {
-        base.Initialize();
+        base.PrepareActions();
 
         this.Actions.Add(new PropertyAction("Width"));
         this.Actions.Add(new PropertyAction("Height"));
 
         this.BackgroundProperty = new PropertyAction("BorderBrush");
-        //IMPORTANT: If action is a direct child of ActionGroup, this call is required after creating of action to correctly initialize it.
+        //IMPORTANT: If action is a direct child of ActionGroup, this call is required after creation of the action to prepare it correctly.
         this.BackgroundProperty.SetActionProvider(this.ActionProvider);
         
         this.HelpLinkAction = new LinkAction("Help", () => { Process.Start("https:/github.com/microsoft/xaml-designer-extensibility"); });
@@ -138,9 +138,9 @@ public class MyCustomActionGroup : ActionGroup
 public class ButtonCustomActionGroupTemplateProvider : SuggestedActionProvider
 {
     public override string Header => "Custom Action Group";
-    public override void Initialize()
+    public override void PrepareActions()
     {
-        base.Initialize();
+        base.PrepareActions();
         this.AddGroup(new MyCustomActionGroup());
     }
 }
@@ -163,9 +163,9 @@ public class MyCustomSuggestedActionProvider : SuggestedActionProvider
         this.ShortDocumentation = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     }
 
-    public override void Initialize()
+    public override void PrepareActions()
     {
-        base.Initialize();
+        base.PrepareActions();
 
         this.AddGroup(new ActionGroup(ButtonActionProvider.Token_Group_Common,
             new PropertyAction(ButtonActionProvider.Token_Property_Content, "Content"),

@@ -1,4 +1,4 @@
-## Suggested Actions - Behaviors
+## Quick Actions - Behaviors
 
 ![extensibility-migration-architecture](xaml-suggested-actions-no-behaviors.png)
 
@@ -49,7 +49,7 @@ public class ExampleBehaviorActionProvider : BehaviorActionProvider
 ### Metadata registration
 ```CS
 ...
-//Add Behavio provider
+//Add Behavior provider
 builder.AddCustomAttributes("System.Windows.FrameworkElement", new FeatureAttribute(typeof(ExampleBehaviorActionProvider)));
 ...
 ```
