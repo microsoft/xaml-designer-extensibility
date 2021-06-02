@@ -24,7 +24,7 @@ The `SuggestedActionProvider` is at the core of implementing custom Quick Action
 
 Each provider contains a set of ActionGroups, which themselves contain Actions. These Actions are what appear as property editors in the tab content. Groups are separated by a horizontal line. If you need to refer to an Action or ActionGroup programmatically, you can assign it an [Action Token](./xaml-designer-suggested-actions-extensibility-tokens.md).
 
-For a list of available pre-made actions, see [Features](./xaml-designer-suggested-actions-extensibility-features.md). To learn about creating custom actions, see [Customization](./xaml-designer-suggested-actions-extensibility-customization.md).
+For a list of available pre-made actions and action types, see [Features](./xaml-designer-suggested-actions-extensibility-features.md). To learn about creating custom actions, see [Customization](./xaml-designer-suggested-actions-extensibility-customization.md).
 
 If a SuggestedActionProvider does not contain any visible actions after `PrepareActions()` completes, it will not be shown in the popup. However, if the provider _becomes_ empty as a result of some action performed while the popup is open, the tab will remain present and display its `OnEmptyDisplayString`.
 
@@ -61,7 +61,7 @@ public class ButtonActionProvider : SuggestedActionProvider
 
     /// <summary>
     /// AppearsOnInheritedTypes indicates whether this provider should be added to controls
-    /// that inherit its primary target control.For example, if a provider on a WPF ListBox
+    /// that inherit its primary target control. For example, if a provider on a WPF ListBox
     /// has AppearsOnInheritedTypes set to true, that same provider will appear on WPF ListViews,
     /// because ListView inherits from ListBox. If AppearsOnInheritedTypes is set to false, it will
     /// only appear on ListBox.
@@ -73,7 +73,7 @@ public class ButtonActionProvider : SuggestedActionProvider
     /// <summary>
     /// The Position field can be used to order the providers within the Tab View.
     /// Lower numbers appear first.
-    /// Note that your provider's position must be above ActionProviderBase.MinimumAllowablePosition or it will be ignored.
+    /// Your provider's position must be above ActionProviderBase.MinimumAllowablePosition or it will be ignored.
     /// 
     /// Note: This field was not added until 16.10 Preview 3.
     /// </summary>

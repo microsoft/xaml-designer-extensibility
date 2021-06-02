@@ -1,5 +1,5 @@
 ## Inheriting Existing Providers Example
-Suggested Action Providers can inherit existing providers. In the below example, the `ExampleSimpleButtonSuggestedActionProvider` extends the `ExampleButtonSuggestedActionProvider`, hides some of the unwanted actions, and adds a few additional actions of its own.
+Suggested Action Providers can inherit existing providers. In the example below, the `ExampleSimpleButtonSuggestedActionProvider` extends the `ExampleButtonSuggestedActionProvider`, hides some of the unwanted actions, and adds a few additional actions of its own.
 
 Note the use of the base class' `Token_Last` property to ensure there are no conflicting `ActionToken` values between the inherited provider and the base provider.
 

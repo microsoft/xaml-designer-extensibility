@@ -1,6 +1,6 @@
 ## Quick Actions Customization
 
-There are multiple ways that you can customize the view of "XAML Quick Actions":
+There are multiple ways to customize the view of "XAML Quick Actions":
 
 ### 1. Action
 ![extensibility-migration-architecture](xaml-suggested-customAction.png)
