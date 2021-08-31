@@ -90,3 +90,15 @@ Here's an example:
 Visual Studio has supported populating Toolbox with controls from [UWP Extension SDKs](https://docs.microsoft.com/en-us/visualstudio/extensibility/creating-a-software-development-kit?view=vs-2019#ToolboxItems) since Visual Studio 11. Through Visual Studio 16, the list of Toolbox controls for an Extension SDK was determined dynamically by enumerating all of the public control types exposed by the SDK's assemblies. The only control the SDK has over Toolbox population in these older versions of Visual Studio is specifying which assemblies contain controls (via File elements in the manifest) and specifying which tab the Toolbox items should appear in (via the VSCategory attribute on ToolboxItems elements).
 
 Starting in Visual Studio 17.0, Extension SDKs are required to explicitly declare the types that they wish to appear in the Toolbox by listing them in their [SdkManifest.xml file](https://docs.microsoft.com/en-us/visualstudio/extensibility/creating-a-software-development-kit?view=vs-2022#ToolboxItems) as children of the manifest's ToolboxItems elements. Toolbox will show the Toolbox items listed in the manifest for any project that is compatible with the package, even projects that do not reference that package. The behavior of older versions of Visual Studio is unchanged; they will ignore the list of controls in the manifest.
+
+Here is an example:
+
+```xml
+<FileList>
+  <File Reference="AssemblyName.dll">
+    <ToolboxItems VSCategory="ToolboxTabName">
+      <Item Type="Namespace.ControlName" />
+    </ToolboxItems>
+  </File>
+</FileList>
+```
