@@ -7,6 +7,7 @@ There are several ways to get your XAML controls to appear in Visual Studio's To
 | [Unreferenced assemblies](#toolbox-items-from-unreferenced-assemblies)         | WPF .NET Framework   | All supported versions                 |
 | [Referenced NuGet packages](#toolbox-items-from-referenced-nuget-packages)     | All XAML frameworks  | Visual Studio 15.0 and later           |
 | [Unreferenced NuGet packages](#toolbox-items-from-unreferenced-nuget-packages) | WPF .NET Core        | Visual Studio 16.7 Preview 2 and later |
+| [UWP Extension SDKs](#toolbox-items-from-uwp-extension-sdks)                   | UWP                  | All supported versions                 |
 
 ## Toolbox items from unreferenced assemblies
 
@@ -83,3 +84,21 @@ Here's an example:
 1. Open [...\samples\CustomControlLibrary.WpfCore\CustomControlLibrary.WpfCore.sln](../samples/CustomControlLibrary.WpfCore/CustomControlLibrary.WpfCore.sln) in Visual Studio.
 1. Build the solution.
 1. Generate the package (bin\Debug\CustomControlLibrary.WpfCore.1.0.0.nupkg) by right-clicking on the CustomControlLibrary.WpfCore project in Solution Explorer and selecting Pack, or by running the following command from the directory containing CustomControlLibrary.WpfCore.csproj: msbuild /t:Pack
+
+## Toolbox items from UWP Extension SDKs
+
+Visual Studio has supported populating Toolbox with controls from [UWP Extension SDKs](https://docs.microsoft.com/en-us/visualstudio/extensibility/creating-a-software-development-kit?view=vs-2019#ToolboxItems) since Visual Studio 11. Through Visual Studio 16, the list of Toolbox controls for an Extension SDK was determined dynamically by enumerating all of the public control types exposed by the SDK's assemblies. The only impact an SDK can have on Toolbox population in these older versions of Visual Studio is specifying which assemblies contain controls (via File elements in the manifest) and specifying which tab the Toolbox items should appear in (via the VSCategory attribute on ToolboxItems elements).
+
+Starting in Visual Studio 17.0, Extension SDKs are required to explicitly declare the types that they wish to appear in the Toolbox by listing them in their [SdkManifest.xml file](https://docs.microsoft.com/en-us/visualstudio/extensibility/creating-a-software-development-kit?view=vs-2022#ToolboxItems) as children of the manifest's ToolboxItems elements. Toolbox will show the Toolbox items listed in the manifest for any project that is compatible with the SDK, even projects that do not reference that SDK. The behavior of older versions of Visual Studio is unchanged; they will ignore the list of controls in the manifest.
+
+Here is an example:
+
+```xml
+<FileList>
+  <File Reference="AssemblyName.dll">
+    <ToolboxItems VSCategory="ToolboxTabName">
+      <Item Type="Namespace.ControlName" />
+    </ToolboxItems>
+  </File>
+</FileList>
+```
