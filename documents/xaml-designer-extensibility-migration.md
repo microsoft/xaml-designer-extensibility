@@ -28,7 +28,7 @@ While third-party control libraries are compiled for the actual target runtime (
 
 ## Decouple attribute tables from run-time types
 
-The surface isolation extensibility model doesn't allow for extensions to depend on actual control libraries, and therefore, extensions can't reference types from the control library. For example, *MyLibrary.designtools.dll* should not have a dependency on *MyLibrary.dll*.
+The surface isolation extensibility model doesn't allow for extensions to depend on actual control libraries, and therefore, extensions can't reference types from the control library. For example, *MyLibrary.designtools.dll* can't have a dependency on *MyLibrary.dll*.
 
 Such dependencies were most common when registering metadata for types via attribute tables. Extension code that references control library types directly via [typeof](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/typeof) or [GetType](https://docs.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/gettype-operator) is substituted in the new APIs by using string-based type names:
 
