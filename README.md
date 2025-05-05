@@ -3,6 +3,9 @@
 Starting in Visual Studio 2019 version 16.3, the XAML designer supports two different architectures: the designer isolation architecture and the
 more recent surface isolation architecture. [This article](./documents/xaml-designer-extensibility-migration.md) explains the changes in detail. The [samples](./samples) folder contains code samples that demonstrate how to use XAML designer extensibility.
 
+> **Note**  
+> For issues with the XAML Designer and its extensibility model in Visual Studio, use the [Send Feedback](https://developercommunity.visualstudio.com/) button within Visual Studio. To report issues with these samples or documentation, please use the [Issues](https://github.com/microsoft/xaml-designer-extensibility/issues) tab of this repository.
+
 ## Documents
 - [Referencing XAML Designer Extensibility Binaries](./documents/referencing-xaml-designer-extensibility.md)
 - [XAML Designer Extensibility Migration](./documents/xaml-designer-extensibility-migration.md)
